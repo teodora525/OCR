@@ -8,8 +8,8 @@ Svaki član tima čekira ✅ kad završi svoj deo.
 ## 🟢 Sprint 1 – Osnova projekta i podaci
 - [X] **A:** Kreirati strukturu foldera `src/ocr/...` i dodati `__init__.py`
 - [X] **A:** Implementirati `load_mnist()` (normalizacija + split train/val/test)
-- [ ] **B:** Napraviti `test_mnist.py` i ispisati oblike i opseg piksela
-- [ ] **B:** Vizuelizovati 10 uzoraka i sačuvati u `artifacts/sample_images.png`
+- [X] **B:** Napraviti `test_mnist.py` i ispisati oblike i opseg piksela
+- [X] **B:** Vizuelizovati 10 uzoraka i sačuvati u `artifacts/sample_images.png`
 
 ---
 
@@ -23,7 +23,7 @@ Svaki član tima čekira ✅ kad završi svoj deo.
 
 ## 🟢 Sprint 3 – Evaluacija i analiza
 - [X] **A:** Napraviti `evaluate.py` (confusion matrix + classification report)
-- [ ] **B:** Napraviti `plot_training.py` (loss/accuracy krive iz CSV-a)
+- [X] **B:** Napraviti `plot_training.py` (loss/accuracy krive iz CSV-a)
 - [X] **A:** Iscrtati 10 pogrešno klasifikovanih primera i sačuvati u `artifacts/misclassified_samples.png`
 - [ ] **B:** Napisati kratak opis grešaka i dodati u README/izveštaj
 
