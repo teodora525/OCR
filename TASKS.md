@@ -31,8 +31,8 @@ Svaki član tima čekira ✅ kad završi svoj deo.
 
 ## 🟢 Sprint 4 – Demo aplikacija
 - [X] **A:** Implementirati backend deo – učitavanje modela i pretprocesiranje slike (single digit)
-- [ ] **A:** Dodati funkciju za segmentaciju i predikciju niza cifara (`pipeline.py`)
-- [ ] **B:** Implementirati frontend deo (Streamlit upload + top-3 predikcija + checkbox za višecifarski mod)
+- [X] **A:** Dodati funkciju za segmentaciju i predikciju niza cifara (`pipeline.py`)
+- [X] **B:** Implementirati frontend deo (Streamlit upload + top-3 predikcija + checkbox za višecifarski mod)
 - [ ] **A+B:** Testirati na različitim računarima
 
 ---
