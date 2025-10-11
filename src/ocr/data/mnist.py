@@ -1,6 +1,6 @@
 from __future__ import annotations
 import numpy as np
-from tensorflow.keras.datasets import mnist
+from keras.datasets import mnist
 from typing import Tuple
 
 def load_mnist(normalize: bool = True, expand_dims: bool = True,

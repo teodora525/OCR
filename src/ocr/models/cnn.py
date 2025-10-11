@@ -1,6 +1,6 @@
-from tensorflow.keras import layers, models, regularizers
+from keras import layers, models, regularizers
 from tensorflow import keras
-from tensorflow.keras import layers
+from keras import layers
 
 # model treniran za cifre
 def build_cnn(input_shape=(28, 28, 1), num_classes: int = 10) -> models.Model:

@@ -1,29 +1,34 @@
 import cv2
 import numpy as np
 
-def _to_binary_inv(gray):
-    # OTSU + invert (bela cifra na crnom)
+import cv2, numpy as np
+
+def _to_binary_inv(gray: np.ndarray) -> np.ndarray:
+    if gray.ndim == 3:
+        gray = cv2.cvtColor(gray, cv2.COLOR_BGR2GRAY)
     _, th = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    # Ako je pozadina svetla, invertuj
+    # ako je pozadina svetla → invertuj da mastilo bude belo
     if th.mean() > 127:
         th = 255 - th
     return th
 
-def _tight_bbox(bin_img):
+def _tight_bbox(bin_img: np.ndarray):
     ys, xs = np.where(bin_img > 0)
     if len(xs) == 0 or len(ys) == 0:
         return None
-    return xs.min(), ys.min(), xs.max(), ys.max()
+    return int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())
 
-def _center_mass(img):
-    # centriranje po momentima (MNIST stil)
-    m = cv2.moments(img)
+def _center_mass(img28: np.ndarray) -> np.ndarray:
+    # img28: 28x28, mastilo belo (255), pozadina crna
+    m = cv2.moments(img28)
     if abs(m["m00"]) < 1e-3:
-        return img
+        return img28
     cx, cy = m["m10"] / m["m00"], m["m01"] / m["m00"]
-    shiftx, shifty = int(np.round(img.shape[1]/2 - cx)), int(np.round(img.shape[0]/2 - cy))
-    M = np.float32([[1, 0, shiftx], [0, 1, shifty]])
-    return cv2.warpAffine(img, M, (img.shape[1], img.shape[0]), flags=cv2.INTER_NEAREST)
+    shift_x = int(round(14 - cx))
+    shift_y = int(round(14 - cy))
+    M = np.float32([[1, 0, shift_x], [0, 1, shift_y]])
+    return cv2.warpAffine(img28, M, (28, 28), flags=cv2.INTER_NEAREST, borderValue=0)
+
 
 def prepare_image(image_path: str):
     """

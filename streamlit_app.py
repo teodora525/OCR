@@ -5,14 +5,9 @@ import cv2
 import tensorflow as tf
 
 from src.ocr.preprocess import prepare_image
-from src.ocr.pipeline import (
-    predict_line_from_array,          # cifre (multi)
-    predict_line_string_from_array,   # cifre (string) - ako ti zatreba
-    _segment_boxes,                   # crtanje bbox-ova
-    predict_letters_from_array,       # SLOVA (multi)
-    predict_letter28x28,           # SLOVA (single)
-    predict_text_from_array,
-)
+from src.ocr.pipeline import OCRPipeline
+ocr = OCRPipeline()   # napravi jednom – globalno
+
 
 MODEL_PATH = "models/mnist_cnn.keras"
 
@@ -52,7 +47,7 @@ if uploaded:
 
     # --- MEŠOVITO (A–Z + 0–9) ima prioritet ---
     if mixed_mode:
-        text, details = predict_text_from_array(img_bgr)
+        text, details = ocr.predict_text_from_array(img_bgr)
         st.subheader(f"Predikcija (mešovito): **{text}**")
         st.write("Confidence po simbolu (sleva nadesno):")
         for i, (sym, conf, _) in enumerate(details, 1):
@@ -70,7 +65,7 @@ if uploaded:
         model = load_model()  # tvoj postojeći cifarski model
 
         if mode_multi:
-            preds = predict_line_from_array(img_bgr)
+            preds = ocr.predict_line_from_array(img_bgr)
             out_str = "".join(str(l) if isinstance(l, int) else "?" for (l, _) in preds)
             st.subheader(f"Predikcija niza (cifre): **{out_str}**")
 
@@ -81,7 +76,7 @@ if uploaded:
             # Prikaz segmentacije (bbox-ovi)
             img_draw = img_bgr.copy()
             gray = cv2.cvtColor(img_draw, cv2.COLOR_BGR2GRAY)
-            for (x, y, w, h) in _segment_boxes(gray):
+            for (x, y, w, h) in ocr._segment_boxes(gray):
                 cv2.rectangle(img_draw, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
             st.image(
@@ -116,7 +111,7 @@ if uploaded:
     # ====== SLOVA ======
     else:
         if mode_multi:
-            preds = predict_letters_from_array(img_bgr)  # [(letter, conf, (x,y,w,h)), ...]
+            preds = ocr.predict_letters_from_array(img_bgr)  # [(letter, conf, (x,y,w,h)), ...]
             out_str = "".join([l for (l, _, _) in preds]) if preds else ""
             st.subheader(f"Predikcija niza (slova): **{out_str}**")
 
@@ -163,5 +158,5 @@ if uploaded:
             ys = (28 - nh) // 2
             canvas[ys:ys+nh, xs:xs+nw] = small
 
-            letter, conf = predict_letter28x28(canvas)
+            letter, conf = ocr.predict_letter28x28(canvas)
             st.subheader(f"Predikcija (slovo): **{letter}**  (p={conf:.3f})")
