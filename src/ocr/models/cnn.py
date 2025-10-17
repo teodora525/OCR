@@ -38,7 +38,7 @@ def build_cnn(input_shape=(28, 28, 1), num_classes: int = 10) -> models.Model:
     model = models.Model(inputs, outputs, name="mnist_cnn")
     return model
 
-# model kreiran za slova
+# model treniran za slova
 def build_letters_cnn(input_shape=(28, 28, 1), num_classes=26):
     inputs = keras.Input(shape=input_shape)
 

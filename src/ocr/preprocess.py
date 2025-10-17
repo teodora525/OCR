@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 def _to_binary_inv(gray):
-    # OTSU + invert (bela cifra na crnom)
+    #  invert (bela cifra na crnom)
     _, th = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     # Ako je pozadina svetla, invertuj
     if th.mean() > 127:
