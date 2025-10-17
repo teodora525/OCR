@@ -10,12 +10,12 @@ from pathlib import Path
 from src.ocr.preprocess import _to_binary_inv, _tight_bbox, _center_mass
 
 # ====== PATHS ======
-FILE_DIR = Path(__file__).resolve().parent      # .../OCR/src/ocr
-PROJECT_ROOT = FILE_DIR.parent.parent           # .../OCR
+FILE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = FILE_DIR.parent.parent
 MODELS = PROJECT_ROOT / "models"
 ARTIFACTS = PROJECT_ROOT / "artifacts"
 
-# ⬇⬇ VAŽNO: ime fajla za cifarski model da bude isto kao u Streamlit-u
+# VAŽNO: ime fajla za cifarski model da bude isto kao u Streamlit-u
 MODEL_PATH = str(MODELS / "mnist_cnn.keras")             # npr. OCR/models/mnist.keras
 LETTERS_MODEL_PATH = str(ARTIFACTS / "letters_cnn.h5")
 
@@ -141,7 +141,7 @@ def predict_letters_from_array(img_bgr: np.ndarray,
     boxes: opcioni list [(x,y,w,h), ...] ako već imaš segmentaciju.
     vraća: list[(letter, conf, (x,y,w,h))]
     """
-    if boxes is None:  # 👈 4 razmaka
+    if boxes is None:
         gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
         _, th = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         if th.mean() > 127:
@@ -179,7 +179,7 @@ def predict_letters_from_array(img_bgr: np.ndarray,
         xs = (28 - nw) // 2
         ys = (28 - nh) // 2
         canvas[ys:ys+nh, xs:xs+nw] = small
-        canvas = _center_mass(canvas)         # 👈 DODATO
+        canvas = _center_mass(canvas)
 
         letter, conf = predict_letter28x28(canvas)
         out.append((letter, conf, (x, y, w, h)))
@@ -228,7 +228,7 @@ def predict_text_from_array(img_bgr: np.ndarray,
         canvas = np.zeros((28, 28), dtype=np.uint8)
         xs, ys = (28 - nw)//2, (28 - nh)//2
         canvas[ys:ys+nh, xs:xs+nw] = small
-        canvas = _center_mass(canvas)            # 👈 DODATO
+        canvas = _center_mass(canvas)
 
         # digit
         xd = (canvas.astype("float32") / 255.0)[..., None][None, ...]

@@ -25,7 +25,7 @@ Svaki član tima čekira ✅ kad završi svoj deo.
 - [X] **A:** Napraviti `evaluate.py` (confusion matrix + classification report)
 - [X] **B:** Napraviti `plot_training.py` (loss/accuracy krive iz CSV-a)
 - [X] **A:** Iscrtati 10 pogrešno klasifikovanih primera i sačuvati u `artifacts/misclassified_samples.png`
-- [ ] **B:** Napisati kratak opis grešaka i dodati u README/izveštaj
+- [x] **B:** Napisati kratak opis grešaka i dodati u README/izveštaj
 
 ---
 
@@ -38,10 +38,10 @@ Svaki član tima čekira ✅ kad završi svoj deo.
 ---
 
 ## 🟢 Sprint 5 – Dokumentacija i prezentacija
-- [ ] **A:** Napraviti deo izveštaja o modelu (arhitektura, broj parametara, augmentacija)
-- [ ] **B:** Napraviti deo izveštaja o evaluaciji (grafici, matrica konfuzije, analiza grešaka)
-- [ ] **A+B:** Pripremiti prezentaciju (slajdovi sa grafikama i demo prikazom)
-- [ ] **A+B:** Finalno testiranje celog projekta
+- [X] **A:** Napraviti deo izveštaja o modelu (arhitektura, broj parametara, augmentacija)
+- [x] **B:** Napraviti deo izveštaja o evaluaciji (grafici, matrica konfuzije, analiza grešaka)
+- [x] **A+B:** Pripremiti prezentaciju (slajdovi sa grafikama i demo prikazom)
+- [x] **A+B:** Finalno testiranje celog projekta
 
 ---
 
@@ -54,7 +54,3 @@ Svaki član tima čekira ✅ kad završi svoj deo.
 - Evaluacija, matrica konfuzije, i vizualizacija pogrešnih primera  
 - Backend pretprocesiranje i `predict_single` za jednu cifru  
 
-🔜 Sledeće:  
-- **(A):** dodaj `pipeline.py` za višecifarski unos i testiraj sa „1854“  
-- **(B):** napravi `plot_training.py` i doda rezultate u README  
-- **(B):** počne sa Streamlit UI (upload slike, prikaz predikcije)  
