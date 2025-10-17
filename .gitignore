@@ -1,0 +1,23 @@
+# Python venv
+.venv/
+venv/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / editors
+.idea/
+.vscode/
+
+# Models & artifacts (veliki fajlovi – po dogovoru možete ih ignorisati)
+models/*.h5
+models/*.keras
+artifacts/*.png
+artifacts/*.csv
+artifacts/*.txt
+artifacts/*.log
